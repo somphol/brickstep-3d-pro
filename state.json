@@ -1,0 +1,60 @@
+{
+  "project": "BrickStep 3D Pro",
+  "description": "A production-ready 250-piece Lego assembly studio with step-by-step 3D instructions, raycast ghost snapping, sub-assembly modules, explode view, JSON persistence, and a custom authoring studio.",
+  "build": {
+    "startedAt": "2026-11-01T03:35:31.496Z",
+    "completedAt": "2026-11-01T04:09:13.297Z",
+    "durationSeconds": 2021.8,
+    "durationHuman": "33m 42s",
+    "timezone": "UTC"
+  },
+  "tokens": {
+    "input": 468717,
+    "output": 88736,
+    "reasoning": 158808,
+    "cacheRead": 31545600,
+    "cacheWrite": 1128,
+    "total": 716261,
+    "totalWithCache": 32262989,
+    "note": "Snapshot from the OpenCode session record when the project was packaged. total = input + output + reasoning. Cache reads/writes are reported separately because they are a subset of context usage. The final response and any post-snapshot publishing actions are outside this count."
+  },
+  "cost": {
+    "usd": 0.0,
+    "note": "As reported by the OpenCode session record."
+  },
+  "sessionId": "ses_e6ad2c666ffeIjbB2DpDYHp3Fo",
+  "model": {
+    "name": "DeepSeek V4.1 Flash",
+    "providerID": "opencode-go",
+    "modelID": "deepseek-v4.1-flash"
+  },
+  "harness": {
+    "name": "OpenCode",
+    "version": "2.2.5"
+  },
+  "repository": "https://github.com/somphol/brickstep-3d-pro",
+  "pages": "https://somphol.github.io/brickstep-3d-pro/",
+  "artifacts": [
+    "index.html",
+    "style.css",
+    "script.js",
+    "README.md",
+    "STATE.md",
+    "state.json",
+    "screenshot.png",
+    "screenshot-instructions.png",
+    "screenshot-authoring.png",
+    "screenshot-explode.png",
+    "LICENSE",
+    ".nojekyll"
+  ],
+  "verification": [
+    "Exactly 250 generated placements; 0 out-of-bounds bricks; 0 overlapping stud cells.",
+    "250 sequential snaps reach completed=true and render the completion dialog.",
+    "localStorage persistence, JSON progress import, and custom authoring import verified.",
+    "Authoring placement, 90-degree rotation, undo/clear, and 250-piece limit paths verified.",
+    "Responsive layout checked at 390px and 1600px; no horizontal overflow at the mobile breakpoint.",
+    "Three.js scene rendered in headless Chrome without JavaScript errors after the InstancedMesh colour-buffer fix."
+  ],
+  "credits": "Built with OpenCode and DeepSeek V4.1 Flash. The app, procedural brick engine, 250-step model, UI, screenshots, and documentation were produced in a single agent session."
+}
