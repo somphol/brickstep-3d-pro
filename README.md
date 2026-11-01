@@ -1,12 +1,21 @@
+<div align="center">
+
+<img src="docs/social-card.png" alt="BrickStep 3D Pro — Multi-Model LEGO Assembly Studio" width="100%" />
+
 # BrickStep 3D Pro
 
-**A multi-model LEGO assembly studio with 13 procedural presets — ten of them 3,000–3,900-piece mega builds — plus step-by-step 3D instructions, ghost snapping, finished preview, explode view, and a JSON authoring studio.**
+**Multi-Model LEGO Assembly Studio**
 
-Built with vanilla HTML5, CSS3, ES6, and Three.js r128. No framework, no build step, no npm install.
+Thirteen procedural builds — ten of them 3,000–3,900 pieces — with step-by-step 3D instructions, ghost snapping, and a JSON authoring studio.
 
-**Live demo:** <https://somphol.github.io/brickstep-3d-pro/>
+[![Live demo](https://img.shields.io/badge/live_demo-online-f59e0b?style=flat-square)](https://somphol.github.io/brickstep-3d-pro/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-f59e0b?style=flat-square)](LICENSE)
 
-![BrickStep 3D Pro — Titan Mecha, 3,900 pieces](screenshot.png)
+**[Try it live →](https://somphol.github.io/brickstep-3d-pro/)**
+
+</div>
+
+---
 
 ## The 10 mega presets
 
