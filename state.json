@@ -1,22 +1,22 @@
 {
-  "project": "BrickStep 3D Pro",
-  "description": "A production-ready 250-piece Lego assembly studio with step-by-step 3D instructions, raycast ghost snapping, sub-assembly modules, explode view, JSON persistence, and a custom authoring studio.",
+  "project": "BrickStep 3D Pro \u00b7 Multi-Model",
+  "description": "A 13-model Lego assembly studio with ten 3,000\u20133,900-piece mega presets, lazy one-at-a-time loading, step instructions, finished preview, explode view, JSON persistence and a custom authoring studio.",
   "build": {
     "startedAt": "2026-11-01T03:35:31.496Z",
-    "completedAt": "2026-11-01T04:09:13.297Z",
-    "durationSeconds": 2021.8,
-    "durationHuman": "33m 42s",
+    "completedAt": "2026-11-01T05:25:56.156Z",
+    "durationSeconds": 6624.7,
+    "durationHuman": "1h 50m 25s",
     "timezone": "UTC"
   },
   "tokens": {
-    "input": 468717,
-    "output": 88736,
-    "reasoning": 158808,
-    "cacheRead": 31545600,
+    "input": 844345,
+    "output": 188952,
+    "reasoning": 358093,
+    "cacheRead": 130263296,
     "cacheWrite": 1128,
-    "total": 716261,
-    "totalWithCache": 32262989,
-    "note": "Snapshot from the OpenCode session record when the project was packaged. total = input + output + reasoning. Cache reads/writes are reported separately because they are a subset of context usage. The final response and any post-snapshot publishing actions are outside this count."
+    "total": 1391390,
+    "totalWithCache": 131655814,
+    "note": "Snapshot from the OpenCode session record when the multi-model build was packaged. total = input + output + reasoning. Cache reads/writes are reported separately because they are a subset of context usage. The final response and the publishing push are outside this count."
   },
   "cost": {
     "usd": 0.0,
@@ -34,6 +34,86 @@
   },
   "repository": "https://github.com/somphol/brickstep-3d-pro",
   "pages": "https://somphol.github.io/brickstep-3d-pro/",
+  "models": [
+    {
+      "id": "castle-workshop-250",
+      "name": "Castle Workshop",
+      "pieces": 250,
+      "category": "Classic"
+    },
+    {
+      "id": "aurora-shuttle",
+      "name": "Aurora Shuttle",
+      "pieces": 1099,
+      "category": "Space \u00b7 1K"
+    },
+    {
+      "id": "neon-wyrm",
+      "name": "Neon Wyrm",
+      "pieces": 1336,
+      "category": "Fantasy \u00b7 1K"
+    },
+    {
+      "id": "neo-megacity",
+      "name": "Neo Megacity",
+      "pieces": 3317,
+      "category": "Mega \u00b7 3K"
+    },
+    {
+      "id": "titan-mecha",
+      "name": "Titan Mecha",
+      "pieces": 3900,
+      "category": "Mega \u00b7 Robot"
+    },
+    {
+      "id": "celestial-dragon",
+      "name": "Celestial Dragon",
+      "pieces": 3300,
+      "category": "Mega \u00b7 Fantasy"
+    },
+    {
+      "id": "aurora-dreadnought",
+      "name": "Aurora Dreadnought",
+      "pieces": 3700,
+      "category": "Mega \u00b7 Space"
+    },
+    {
+      "id": "pirate-galleon",
+      "name": "Pirate Galleon",
+      "pieces": 3600,
+      "category": "Mega \u00b7 Adventure"
+    },
+    {
+      "id": "eiffel-tower",
+      "name": "Eiffel Tower",
+      "pieces": 3900,
+      "category": "Mega \u00b7 Landmark"
+    },
+    {
+      "id": "colosseum",
+      "name": "Grand Colosseum",
+      "pieces": 3452,
+      "category": "Mega \u00b7 Landmark"
+    },
+    {
+      "id": "crystal-citadel",
+      "name": "Crystal Citadel",
+      "pieces": 3808,
+      "category": "Mega \u00b7 Fantasy"
+    },
+    {
+      "id": "solaris-station",
+      "name": "Solaris Station",
+      "pieces": 3532,
+      "category": "Mega \u00b7 Space"
+    },
+    {
+      "id": "sun-pyramid",
+      "name": "Sun Pyramid",
+      "pieces": 3643,
+      "category": "Mega \u00b7 Landmark"
+    }
+  ],
   "artifacts": [
     "index.html",
     "style.css",
@@ -42,6 +122,7 @@
     "STATE.md",
     "state.json",
     "screenshot.png",
+    "screenshot-models.png",
     "screenshot-instructions.png",
     "screenshot-authoring.png",
     "screenshot-explode.png",
@@ -49,12 +130,16 @@
     ".nojekyll"
   ],
   "verification": [
-    "Exactly 250 generated placements; 0 out-of-bounds bricks; 0 overlapping stud cells.",
-    "250 sequential snaps reach completed=true and render the completion dialog.",
-    "localStorage persistence, JSON progress import, and custom authoring import verified.",
-    "Authoring placement, 90-degree rotation, undo/clear, and 250-piece limit paths verified.",
-    "Responsive layout checked at 390px and 1600px; no horizontal overflow at the mobile breakpoint.",
-    "Three.js scene rendered in headless Chrome without JavaScript errors after the InstancedMesh colour-buffer fix."
+    "13 presets generated and audited: 250, 1,099, 1,336, and ten 3,300\u20133,900-piece mega builds.",
+    "Every preset: zero out-of-bounds bricks and zero overlapping stud cells.",
+    "Lazy switching verified: only the active model's placement array and instanced batches are retained; per-model progress resumes correctly.",
+    "Finished preview verified at step 1 and step 400: all pieces shown, saved step unchanged, snapping disabled until Build is selected.",
+    "Completion verified on the 3,900-piece Titan Mecha; completion dialog and dynamic stats render correctly.",
+    "JSON progress import into a 3,600-piece preset verified; custom authoring import and save/load paths verified.",
+    "Authoring mode verified against a 3,900-piece active model with a 24\u00d724 custom board and clean return to the preset.",
+    "Responsive layout checked at 390px; no horizontal overflow; scrollable 13-model library at 178px.",
+    "All thirteen models rendered in headless Chrome without JavaScript errors."
   ],
-  "credits": "Built with OpenCode and DeepSeek V4.1 Flash. The app, procedural brick engine, 250-step model, UI, screenshots, and documentation were produced in a single agent session."
+  "credits": "Built with OpenCode and DeepSeek V4.1 Flash. The 13-model registry, procedural mega builders, lazy loader, finished preview, authoring studio, UI, screenshots, and documentation were produced in a single agent session.",
+  "publishedAt": "2026-11-01T05:25:56.156Z"
 }
