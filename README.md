@@ -167,8 +167,16 @@ documentation fixes alike. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and th
 
 ## Documentation
 
+New maintainers and AI agents should start with **[AGENTS.md](AGENTS.md)**.
+
 | Document | Purpose |
 | --- | --- |
+| [AGENTS.md](AGENTS.md) | Handoff: commands, architecture, constraints, known issues, continuity |
+| [docs/REPRODUCTION.md](docs/REPRODUCTION.md) | Rebuild and verification book |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Module map, coordinates, rendering and persistence contracts |
+| [docs/TESTING.md](docs/TESTING.md) | What was actually run, the manual matrix, and known gaps |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | GitHub Pages operations, verification URLs, rollback |
+| [skills/brickstep-3d-pro/SKILL.md](skills/brickstep-3d-pro/SKILL.md) | Reusable build skill with the source as a byte-identical template |
 | [README.md](README.md) | Overview, setup, controls, and architecture |
 | [CHANGELOG.md](CHANGELOG.md) | Notable changes and release history |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Local workflow, constraints, and pull request checks |

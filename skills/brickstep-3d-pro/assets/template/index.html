@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b14" />
+  <meta name="author" content="Somphol Boonjing" />
+  <meta name="description" content="BrickStep 3D Pro — a multi-model Lego assembly studio with 250 to 3,900 pieces, step-by-step 3D instructions, ghost previews, snapping, finished preview, explode view and a custom authoring studio." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='20' width='52' height='34' rx='6' fill='%23ffc93c'/%3E%3Crect x='6' y='20' width='52' height='10' rx='5' fill='%23ffdd77'/%3E%3Ccircle cx='19' cy='18' r='7' fill='%23ffdd77'/%3E%3Ccircle cx='45' cy='18' r='7' fill='%23ffdd77'/%3E%3C/svg%3E" />
+  <title>BrickStep 3D Pro — Multi-Model Assembly Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="canonical" href="https://somphol.github.io/brickstep-3d-pro/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BrickStep 3D Pro" />
+  <meta property="og:title" content="BrickStep 3D Pro — Multi-Model LEGO Assembly Studio" />
+  <meta property="og:description" content="Thirteen procedural builds — ten of them 3,000–3,900 pieces — with step-by-step 3D instructions, ghost snapping, and a JSON authoring studio." />
+  <meta property="og:url" content="https://somphol.github.io/brickstep-3d-pro/" />
+  <meta property="og:image" content="https://somphol.github.io/brickstep-3d-pro/docs/social-card.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BrickStep 3D Pro — Multi-Model LEGO Assembly Studio" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BrickStep 3D Pro — Multi-Model LEGO Assembly Studio" />
+  <meta name="twitter:description" content="Thirteen procedural builds — ten of them 3,000–3,900 pieces — with step-by-step 3D instructions, ghost snapping, and a JSON authoring studio." />
+  <meta name="twitter:image" content="https://somphol.github.io/brickstep-3d-pro/docs/social-card.png" />
+  <meta name="twitter:image:alt" content="BrickStep 3D Pro — Multi-Model LEGO Assembly Studio" />
+
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- ══════════════════════ TOP BAR ══════════════════════ -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="brand-stud s1"></span>
+          <span class="brand-stud s2"></span>
+          <span class="brand-stud s3"></span>
+          <span class="brand-stud s4"></span>
+          <span class="brand-letter">B</span>
+        </div>
+        <div class="brand-copy">
+          <h1>BRICKSTEP <span>3D PRO</span></h1>
+          <p>Multi-Model Lego Assembly Studio</p>
+        </div>
+      </div>
+
+      <div class="topbar-stats" aria-label="Live renderer statistics">
+        <div class="stat">
+          <strong id="fpsValue">60</strong>
+          <span>FPS</span>
+        </div>
+        <div class="stat">
+          <strong id="visibleValue">0</strong>
+          <span>PIECES</span>
+        </div>
+        <div class="stat hide-small">
+          <strong id="drawValue">0</strong>
+          <span>STUDS</span>
+        </div>
+        <div class="stat hide-small">
+          <strong id="qualityValue">HIGH</strong>
+          <span>QUALITY</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" id="btnSound" type="button" aria-label="Toggle sound" title="Toggle sound">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <button class="btn btn-quiet" id="btnSave" type="button" title="Download your progress as a JSON file">
+          <span>💾</span><span class="btn-label">Save Progress</span>
+        </button>
+        <button class="btn btn-quiet" id="btnLoad" type="button" title="Load a BrickStep JSON file">
+          <span>📂</span><span class="btn-label">Load</span>
+        </button>
+        <button class="icon-btn help-btn" id="btnHelp" type="button" aria-label="Open help" title="Help & shortcuts">?</button>
+      </div>
+    </header>
+
+    <!-- ══════════════════════ MAIN WORKSPACE ══════════════════════ -->
+    <main class="workspace">
+      <!-- ─────────── LEFT SIDEBAR ─────────── -->
+      <aside class="sidebar" aria-label="Assembly controls">
+        <section class="panel library-panel">
+          <div class="panel-heading">
+            <span>MODEL LIBRARY</span>
+            <span class="muted" id="libraryStatus">4 MODELS</span>
+          </div>
+          <div class="model-grid" id="modelGrid"></div>
+          <p class="tiny">Presets are generated on demand. Only the active model lives in memory — load them one at a time.</p>
+        </section>
+
+        <section class="panel model-panel">
+          <div class="panel-kicker">ACTIVE MODEL</div>
+          <div class="model-row">
+            <div class="model-icon" aria-hidden="true">🏰</div>
+            <div class="model-copy">
+              <h2 id="modelName">Castle Workshop</h2>
+              <p id="modelMeta">250 pieces · 3 sub-assemblies</p>
+            </div>
+            <span class="live-dot" title="Model ready"></span>
+          </div>
+
+          <div class="progress-head">
+            <span id="stepLabel">STEP 1 OF 250</span>
+            <span id="progressPct">0%</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Build progress" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0" id="progressTrack">
+            <div class="progress-fill" id="progressBar"></div>
+            <div class="progress-glow" id="progressGlow"></div>
+          </div>
+          <div class="module-badge" id="moduleBadge">
+            <span class="module-badge-dot"></span>
+            <span id="moduleBadgeText">Module 1 · Foundation</span>
+          </div>
+        </section>
+
+        <section class="panel brick-bay" id="brickBay">
+          <div class="panel-heading">
+            <span>REQUIRED BRICK</span>
+            <span class="step-chip" id="stepNumberChip">#001</span>
+          </div>
+
+          <div class="brick-display">
+            <div class="brick-stage">
+              <div class="brick-visual" id="brickVisual" draggable="true" title="Drag me onto the glowing target">
+                <span class="stud"></span><span class="stud"></span>
+                <span class="stud"></span><span class="stud"></span>
+                <span class="stud"></span><span class="stud"></span>
+                <span class="stud"></span><span class="stud"></span>
+              </div>
+              <div class="brick-shadow" aria-hidden="true"></div>
+            </div>
+            <div class="brick-info">
+              <h3 id="brickName">2×4 Brick</h3>
+              <p id="brickColorName">Steel Blue</p>
+              <span id="brickDims">4 × 2 studs · 1.2u tall</span>
+            </div>
+          </div>
+
+          <p class="bay-hint" id="bayHint">Click the glowing ghost, press <kbd>Space</kbd>, or drag this brick onto the target.</p>
+          <button class="btn btn-primary btn-block" id="btnSnap" type="button">
+            <span>🧲</span> Snap Into Place <kbd>Space</kbd>
+          </button>
+        </section>
+
+        <section class="panel step-controls">
+          <div class="control-row">
+            <button class="btn btn-control" id="btnPrev" type="button" title="Previous step">← Prev</button>
+            <button class="btn btn-control" id="btnRotate" type="button" title="Rotate preview 90° (R)">⟳ Rotate <kbd>R</kbd></button>
+            <button class="btn btn-control" id="btnNext" type="button" title="Place brick and advance">Next →</button>
+          </div>
+          <div class="scrubber-wrap">
+            <input id="stepRange" class="range" type="range" min="1" max="250" step="1" value="1" aria-label="Jump to step" />
+            <div class="scrubber-labels"><span>START</span><span id="scrubberStep">STEP 001</span><span id="scrubberMax">250</span></div>
+          </div>
+        </section>
+
+        <section class="panel view-panel">
+          <div class="panel-heading">
+            <span>VIEW MODE</span>
+            <span class="status-pill" id="viewModeState">BUILD</span>
+          </div>
+          <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="Build or finished preview">
+            <button type="button" class="view-mode-btn active" data-view="build">🧱 Build</button>
+            <button type="button" class="view-mode-btn" data-view="finished">👁 Finished</button>
+          </div>
+          <p class="tiny" id="viewModeHint">Finished preview is temporary and does not change your saved step.</p>
+        </section>
+
+        <section class="panel modules-panel">
+          <div class="panel-heading">
+            <span>SUB-ASSEMBLIES</span>
+            <span class="muted" id="moduleCount">3 MODULES</span>
+          </div>
+          <div class="module-list" id="moduleList"></div>
+        </section>
+
+        <section class="panel explode-panel">
+          <div class="panel-heading">
+            <span>💥 EXPLODE VIEW</span>
+            <span class="value-chip" id="explodeValue">0%</span>
+          </div>
+          <input id="explodeSlider" class="range range-warm" type="range" min="0" max="100" step="1" value="0" aria-label="Explode view" />
+          <div class="explode-actions">
+            <button class="btn btn-mini" id="btnResetView" type="button">⌂ Reset View</button>
+            <button class="btn btn-mini" id="btnFocus" type="button">🎯 Focus Step</button>
+          </div>
+        </section>
+
+        <section class="panel authoring-panel" id="authoringPanel">
+          <div class="panel-heading">
+            <span>✏️ AUTHORING STUDIO</span>
+            <span class="status-pill" id="authoringState">OFF</span>
+          </div>
+          <button class="btn btn-ghost btn-block" id="btnAuthoring" type="button">Enter Authoring Mode</button>
+          <div class="authoring-tools hidden" id="authoringTools">
+            <div class="authoring-grid">
+              <label for="authorType">Brick
+                <select id="authorType">
+                  <option value="2x4b">2×4 Brick</option>
+                  <option value="2x2b">2×2 Brick</option>
+                  <option value="1x4b">1×4 Brick</option>
+                  <option value="1x2b">1×2 Brick</option>
+                  <option value="2x4p">2×4 Plate</option>
+                  <option value="2x2p">2×2 Plate</option>
+                  <option value="1x4p">1×4 Plate</option>
+                  <option value="1x2p">1×2 Plate</option>
+                </select>
+              </label>
+              <label for="authorColor">Color
+                <input id="authorColor" type="color" value="#3f7fbf" />
+              </label>
+            </div>
+            <div class="authoring-actions">
+              <button class="btn btn-mini" id="btnUndo" type="button">↶ Undo</button>
+              <button class="btn btn-mini" id="btnClearCustom" type="button">🗑 Clear</button>
+              <button class="btn btn-mini" id="btnExportCustom" type="button">⬇ JSON</button>
+            </div>
+            <p class="tiny" id="authoringCount">0 / 250 pieces · click baseplate to stack · R rotates</p>
+          </div>
+        </section>
+
+        <footer class="sidebar-footer">
+          Built with <a href="https://opencode.ai" target="_blank" rel="noopener">OpenCode</a> ·
+          <span id="modelCredit">DeepSeek V4.1 Flash</span>
+        </footer>
+      </aside>
+
+      <!-- ─────────── 3D VIEWPORT ─────────── -->
+      <section class="viewport-shell" id="viewportShell" aria-label="3D assembly viewport">
+        <div id="viewport" class="viewport"></div>
+
+        <div class="viewport-overlay overlay-top-left">
+          <div class="scene-chip live"><span class="pulse-dot"></span> LIVE STUDIO</div>
+          <div class="scene-chip subtle" id="orientationHint">LMB orbit · scroll zoom · RMB pan</div>
+          <div class="preview-badge hidden" id="previewBadge"><span>👁</span> FINISHED MODEL PREVIEW <em>NOT SAVED</em></div>
+        </div>
+
+        <div class="viewport-overlay overlay-top-right">
+          <button class="glass-btn preview-quick" id="btnQuickPreview" type="button" title="Preview the finished model (V)" aria-label="Preview finished model" aria-pressed="false">👁</button>
+          <button class="glass-btn" id="btnFullscreen" type="button" title="Fullscreen" aria-label="Toggle fullscreen">⛶</button>
+          <button class="glass-btn" id="btnScreenshot" type="button" title="Download a screenshot" aria-label="Download screenshot">📷</button>
+        </div>
+
+        <div class="viewport-overlay overlay-bottom-left">
+          <div class="hint-pills">
+            <span class="hint-pill"><b>Click</b> ghost to snap</span>
+            <span class="hint-pill hide-small"><b>R</b> rotate</span>
+            <span class="hint-pill hide-small"><b>← →</b> steps</span>
+          </div>
+        </div>
+
+        <div class="viewport-overlay overlay-bottom-right">
+          <div class="camera-badge"><span class="camera-icon">◉</span> ORBIT CAM</div>
+        </div>
+
+        <div class="drop-hint hidden" id="dropHint">
+          <span class="drop-hint-icon">🧲</span>
+          <span>DROP TO SNAP</span>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+        <div class="complete-overlay hidden" id="completeOverlay" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+          <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+          <div class="complete-card">
+            <div class="complete-icon">🏆</div>
+            <div class="panel-kicker">BUILD COMPLETE</div>
+            <h2 id="completeTitle">Castle Workshop<br /><span>assembled.</span></h2>
+            <p id="completeText">All pieces are locked in place. Orbit the camera and admire the studs.</p>
+            <div class="complete-stats">
+              <div><strong id="completePieces">250</strong><span>PIECES</span></div>
+              <div><strong id="completeModules">3</strong><span>MODULES</span></div>
+              <div><strong>100%</strong><span>COMPLETE</span></div>
+            </div>
+            <div class="complete-actions">
+              <button class="btn btn-primary" id="btnCelebrate" type="button">🎉 Keep Building</button>
+              <button class="btn btn-quiet" id="btnResetBuild" type="button">↺ Start Over</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="model-loader hidden" id="modelLoader" role="status" aria-live="polite">
+          <div class="model-loader-card">
+            <div class="model-loader-spinner" aria-hidden="true"></div>
+            <div class="model-loader-copy">
+              <strong id="modelLoaderTitle">Loading model</strong>
+              <span id="modelLoaderText">Generating bricks…</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="loading-screen" id="loadingScreen">
+          <div class="loading-brick" aria-hidden="true">
+            <span class="lb-stud"></span><span class="lb-stud"></span><span class="lb-stud"></span><span class="lb-stud"></span>
+          </div>
+          <div class="loading-copy">
+            <h2>BRICKSTEP 3D PRO</h2>
+            <p id="loadingText">Preparing the model library…</p>
+          </div>
+          <div class="loading-bar"><div class="loading-bar-fill" id="loadingBar"></div></div>
+          <p class="loading-error hidden" id="loadingError">The 3D engine could not load. Check your connection and reload.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <input type="file" id="fileInput" accept=".json,application/json" hidden />
+
+  <!-- ══════════════════════ HELP MODAL ══════════════════════ -->
+  <div class="modal hidden" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <button class="modal-close" id="btnCloseHelp" type="button" aria-label="Close help">×</button>
+      <div class="panel-kicker">FIELD MANUAL</div>
+      <h2 id="helpTitle">How to build</h2>
+      <div class="help-grid">
+        <div class="help-item"><span class="help-icon">🖱️</span><div><b>Snap a brick</b><p>Click the glowing ghost, press <kbd>Space</kbd>, or drag the brick from the Bay onto the target.</p></div></div>
+        <div class="help-item"><span class="help-icon">🧭</span><div><b>Orbit &amp; zoom</b><p>Drag to orbit, scroll or pinch to zoom, right-drag to pan. <b>Reset View</b> recenters the build.</p></div></div>
+        <div class="help-item"><span class="help-icon">⟳</span><div><b>Rotate</b><p>Press <kbd>R</kbd> or use the Rotate button. In guided mode the snap auto-aligns to the target studs.</p></div></div>
+        <div class="help-item"><span class="help-icon">👁</span><div><b>Finished preview</b><p>Switch <b>View Mode</b> to <b>Finished</b> to see every piece without changing your saved step. Toggle back to Build to continue.</p></div></div>
+        <div class="help-item"><span class="help-icon">💥</span><div><b>Explode view</b><p>Pull the entire model apart along Y to inspect every layer. Return the slider to 0 for assembly.</p></div></div>
+        <div class="help-item"><span class="help-icon">✏️</span><div><b>Authoring studio</b><p>Enter Authoring Mode, pick a brick and color, then click the baseplate to stack. Up to 250 pieces. Export the step sequence as JSON.</p></div></div>
+        <div class="help-item"><span class="help-icon">💾</span><div><b>Save &amp; load</b><p>Progress is auto-saved to this browser. Use Save Progress for a portable <code>brickstep_pro_250.json</code> file.</p></div></div>
+      </div>
+      <div class="shortcuts">
+        <span><kbd>←</kbd><kbd>→</kbd> Steps</span>
+        <span><kbd>Space</kbd> Snap</span>
+        <span><kbd>R</kbd> Rotate</span>
+        <span><kbd>E</kbd> Explode 0/60</span>
+        <span><kbd>V</kbd> Finished preview</span>
+        <span><kbd>F</kbd> Focus</span>
+        <span><kbd>Esc</kbd> Close</span>
+      </div>
+      <div class="modal-footer">
+        <span>Built with <a href="https://opencode.ai" target="_blank" rel="noopener">OpenCode</a> + Three.js</span>
+        <span>Model: DeepSeek V4.1 Flash</span>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript">BrickStep 3D Pro needs JavaScript enabled to render the 250-piece 3D studio.</div>
+  </noscript>
+
+  <!-- Three.js r128 + OrbitControls (CDN with fallbacks) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    if (!window.THREE) {
+      document.write('<script src="https://unpkg.com/three@0.128.0/build/three.min.js"><\/script>');
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script>
+    if (window.THREE && !THREE.OrbitControls) {
+      document.write('<script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"><\/script>');
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
